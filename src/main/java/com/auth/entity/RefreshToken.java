@@ -1,7 +1,7 @@
 package com.auth.entity;
 
 import jakarta.persistence.*;
-import java.time.instant;
+import java.time.Instant;
 
 @Entity
 @Table(name = "refresh_tokens")
@@ -19,7 +19,7 @@ public class RefreshToken {
      private String token;
 
      @Column(nullable = false)
-     private Instance expirayDate;
+     private Instant expiryDate;
 
      public RefreshToken() {
      }

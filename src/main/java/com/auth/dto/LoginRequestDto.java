@@ -1,3 +1,7 @@
+package com.auth.dto;
+
+import jakarta.validation.constraints.NotBlank;
+
 public class LoginRequestDto {
      @NotBlank
      private String usernameOrEmail;
@@ -6,7 +10,7 @@ public class LoginRequestDto {
      private String password;
      private String twoFactorCode;
 
-     public String getUsernameOrEMail() {
+     public String getUsernameOrEmail() {
           return usernameOrEmail;
      }
 

@@ -4,7 +4,6 @@ import com.auth.entity.RefreshToken;
 import com.auth.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 

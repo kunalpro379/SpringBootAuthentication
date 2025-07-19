@@ -1,0 +1,75 @@
+# ===============================================
+# PRODUCTION PROFILE CONFIGURATION
+# ===============================================
+
+app:
+  database:
+    type: postgresql  # Can be changed to mysql or mongodb
+    host: ${DATABASE_HOST:localhost}
+    port: ${DATABASE_PORT:5432}
+    name: ${DATABASE_NAME:authdb}
+    username: ${DATABASE_USERNAME:postgres}
+    password: ${DATABASE_PASSWORD:password}
+    pool:
+      maximum-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+    options:
+      show-sql: false
+      format-sql: false
+
+spring:
+  # Will be configured dynamically based on app.database.type
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+
+  # Mail Configuration for Production
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:your-email@gmail.com}
+    password: ${MAIL_PASSWORD:your-app-password}
+
+# Production logging
+logging:
+  level:
+    com.auth: INFO
+    org.springframework.security: WARN
+    org.hibernate.SQL: WARN
+    org.springframework.web: WARN
+  file:
+    name: logs/authentication-server.log
+
+# Production actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when-authorized
+
+# Production specific settings
+server:
+  compression:
+    enabled: true
+  error:
+    include-stacktrace: never
+    include-message: never
+
+app:
+  rate-limit:
+    enabled: true
+    requests-per-minute: 60
+    requests-per-hour: 1000
+  security:
+    max-login-attempts: 5
+    account-lockout-duration: 30

@@ -1,0 +1,73 @@
+# ===============================================
+# TESTING PROFILE CONFIGURATION
+# ===============================================
+
+server:
+  port: 8081
+
+app:
+  database:
+    type: h2
+    name: testdb
+    username: sa
+    password: ""
+    options:
+      show-sql: false
+      format-sql: false
+
+spring:
+  # H2 In-Memory for Testing
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
+  
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+
+  # Mock Email for Testing
+  mail:
+    host: localhost
+    port: 25
+    username: ""
+    password: ""
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: false
+
+# Testing logging (minimal)
+logging:
+  level:
+    com.auth: WARN
+    org.springframework.security: WARN
+    root: WARN
+
+# Disable actuator for testing
+management:
+  endpoints:
+    enabled-by-default: false
+  endpoint:
+    health:
+      enabled: true
+
+# Testing specific overrides
+app:
+  jwt:
+    expiration-ms: 3600000  # 1 hour for testing
+    refresh-expiration-ms: 7200000  # 2 hours for testing
+  cors:
+    allowed-origins: http://localhost:3000
+  rate-limit:
+    enabled: false
+  two-factor:
+    issuer-name: AuthServer Test
+    qr-code:
+      width: 100
+      height: 100

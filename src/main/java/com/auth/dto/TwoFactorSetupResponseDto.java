@@ -5,7 +5,7 @@ public class TwoFactorSetupResponseDto {
      private String secretKey;
      private String[] backupCodes;
 
-     public TwoFactorSetupResponse(
+     public TwoFactorSetupResponseDto(
           String qrCodeUrl,
           String secret,
           String[] backupCodes){
@@ -23,11 +23,11 @@ public class TwoFactorSetupResponseDto {
      }
 
      public String getSecret() {
-          return secret;
+          return secretKey;
      }
 
      public void setSecret(String secret) {
-          this.secret = secret;
+          this.secretKey = secret;
      }
 
      public String[] getBackupCodes() {

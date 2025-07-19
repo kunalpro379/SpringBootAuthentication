@@ -1,0 +1,285 @@
+# ===============================================
+# CUSTOM AUTHENTICATION SERVER CONFIGURATION
+# ===============================================
+# This file allows users to override default settings
+# Uncomment and modify the sections you want to customize
+
+# ===== SERVER CONFIGURATION =====
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  # Uncomment to enable HTTPS
+  # ssl:
+  #   enabled: true
+  #   key-store: classpath:keystore.p12
+  #   key-store-password: changeit
+  #   key-store-type: PKCS12
+
+# ===== DATABASE CONFIGURATION =====
+# Choose your database type and provide connection details
+app:
+  database:
+    # Options: postgresql, mysql, mongodb, h2
+    type: h2
+    host: localhost
+    # port: 5432  # PostgreSQL default
+    # port: 3306  # MySQL default
+    # port: 27017 # MongoDB default
+    # port: 9092  # H2 default
+    name: authdb
+    username: sa
+    password: ""
+    
+    # Connection pool settings (for SQL databases)
+    pool:
+      maximum-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+
+# ===== JWT CONFIGURATION =====
+jwt:
+  # Generate a strong secret key for production
+  secret: "mySecretKey123ForAuthenticationServerDevelopment2024!@#"
+  # Token expiration in milliseconds
+  expiration: 86400000  # 24 hours
+  refresh-expiration: 604800000  # 7 days
+
+# ===== SECURITY CONFIGURATION =====
+security:
+  # Password policy
+  password:
+    min-length: 8
+    require-uppercase: true
+    require-lowercase: true
+    require-numbers: true
+    require-special-chars: true
+  
+  # Account lockout policy
+  account-lockout:
+    enabled: true
+    max-attempts: 5
+    lockout-duration: 900000  # 15 minutes in milliseconds
+  
+  # Session configuration
+  session:
+    timeout: 1800000  # 30 minutes
+    concurrent-sessions: 1
+
+# ===== EMAIL CONFIGURATION =====
+email:
+  # SMTP settings
+  smtp:
+    host: localhost
+    port: 587
+    username: ""
+    password: ""
+    auth: true
+    starttls: true
+  
+  # Email verification settings
+  verification:
+    enabled: true
+    token-expiry: 24  # hours
+    from-address: "noreply@authserver.com"
+    from-name: "Authentication Server"
+  
+  # Password reset settings
+  password-reset:
+    enabled: true
+    token-expiry: 2  # hours
+    max-attempts: 3
+
+# ===== TWO-FACTOR AUTHENTICATION =====
+two-factor:
+  enabled: true
+  issuer: "Authentication Server"
+  # QR code settings
+  qr-code:
+    width: 200
+    height: 200
+
+# ===== OAUTH2 CONFIGURATION =====
+oauth2:
+  # Google OAuth2
+  google:
+    enabled: false
+    client-id: "your-google-client-id"
+    client-secret: "your-google-client-secret"
+    redirect-uri: "http://localhost:8080/oauth2/callback/google"
+  
+  # GitHub OAuth2
+  github:
+    enabled: false
+    client-id: "your-github-client-id"
+    client-secret: "your-github-client-secret"
+    redirect-uri: "http://localhost:8080/oauth2/callback/github"
+  
+  # Success/Failure redirect URLs
+  success-url: "http://localhost:3000/oauth2/redirect"
+  failure-url: "http://localhost:3000/oauth2/redirect?error=true"
+
+# ===== RATE LIMITING =====
+rate-limiting:
+  enabled: true
+  # Login attempts
+  login:
+    max-attempts: 5
+    window-size: 900000  # 15 minutes
+  
+  # API calls
+  api:
+    max-requests: 100
+    window-size: 3600000  # 1 hour
+
+# ===== CORS CONFIGURATION =====
+cors:
+  enabled: true
+  allowed-origins: 
+    - "http://localhost:3000"
+    - "http://localhost:3001"
+  allowed-methods:
+    - GET
+    - POST
+    - PUT
+    - DELETE
+    - OPTIONS
+  allowed-headers:
+    - "*"
+  allow-credentials: true
+  max-age: 3600
+
+# ===== LOGGING CONFIGURATION =====
+logging:
+  level:
+    com.auth: INFO
+    org.springframework.security: WARN
+    org.hibernate.SQL: WARN
+  
+  # File logging
+  file:
+    enabled: true
+    path: "logs/authentication-server.log"
+    max-size: 10MB
+    max-history: 30
+
+# ===== ADMIN CONFIGURATION =====
+admin:
+  # Default admin user (created on first startup)
+  default-user:
+    username: "admin"
+    email: "admin@authserver.com"
+    password: "admin123"  # Change this immediately!
+    create-if-not-exists: true
+  
+  # Admin panel settings
+  panel:
+    enabled: true
+    session-timeout: 3600000  # 1 hour
+
+# ===== API CONFIGURATION =====
+api:
+  # API versioning
+  version: "v1"
+  base-path: "/api"
+  
+  # Documentation
+  documentation:
+    enabled: true
+    swagger-ui: true
+    title: "Authentication Server API"
+    description: "Complete Authentication Server with JWT, OAuth, 2FA"
+    version: "1.0.0"
+
+# ===== HEALTH CHECK CONFIGURATION =====
+health:
+  enabled: true
+  endpoint: "/health"
+  detailed: false  # Set to true for detailed health info
+
+# ===== BACKUP CONFIGURATION =====
+backup:
+  enabled: false
+  # Database backup settings
+  database:
+    enabled: false
+    schedule: "0 0 2 * * ?"  # Daily at 2 AM
+    retention-days: 30
+    location: "backups/"
+
+# ===== MONITORING =====
+monitoring:
+  metrics:
+    enabled: true
+    endpoint: "/metrics"
+  
+  # Performance monitoring
+  performance:
+    enabled: true
+    slow-query-threshold: 1000  # milliseconds
+
+# ===== CUSTOM FEATURES =====
+features:
+  # User registration
+  registration:
+    enabled: true
+    require-email-verification: true
+    auto-login-after-registration: false
+  
+  # Profile management
+  profile:
+    allow-username-change: false
+    allow-email-change: true
+    require-password-for-changes: true
+  
+  # Password recovery
+  password-recovery:
+    enabled: true
+    security-questions: false
+    
+# ===== ENVIRONMENT SPECIFIC =====
+environment:
+  name: "development"  # development, testing, production
+  debug: true
+  
+  # Frontend application URL
+  frontend-url: "http://localhost:3000"
+  
+  # API base URL
+  api-url: "http://localhost:8080"
+
+# ===== CACHE CONFIGURATION =====
+cache:
+  enabled: true
+  provider: "memory"  # memory, redis
+  # Redis settings (if provider is redis)
+  redis:
+    host: "localhost"
+    port: 6379
+    password: ""
+    database: 0
+
+# ===== FILE UPLOAD =====
+file-upload:
+  enabled: true
+  max-file-size: "2MB"
+  max-request-size: "2MB"
+  allowed-types:
+    - "image/jpeg"
+    - "image/png"
+    - "image/gif"
+  upload-path: "uploads/"
+
+# ===== NOTIFICATION SETTINGS =====
+notifications:
+  # Email notifications
+  email:
+    welcome-email: true
+    password-reset: true
+    security-alerts: true
+  
+  # Push notifications (if implemented)
+  push:
+    enabled: false

@@ -12,7 +12,7 @@ public class SignUpRequestDto {
 
      @NotBlank
      @Size(max = 50)
-     @email
+     @Email
      private String email;
 
      private Set<String> roles;
@@ -48,12 +48,12 @@ public class SignUpRequestDto {
           this.password = password;
      }
 
-     public Set<String> getRole() {
-          return this.role;
+     public Set<String> getRoles() {
+          return this.roles;
      }
 
-     public void setRole(Set<String> role) {
-          this.role = role;
+     public void setRoles(Set<String> roles) {
+          this.roles = roles;
      }
 
      public String getFirstName() {

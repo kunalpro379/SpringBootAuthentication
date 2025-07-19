@@ -1,0 +1,78 @@
+# ===============================================
+# DEVELOPMENT PROFILE CONFIGURATION
+# ===============================================
+
+app:
+  database:
+    type: h2
+    host: localhost
+    name: authdb
+    username: sa
+    password: ""
+    options:
+      show-sql: true
+      format-sql: true
+
+spring:
+  # H2 Database Configuration
+  datasource:
+    url: jdbc:h2:mem:authdb
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
+  
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  # Email Configuration (Console for Development)
+  mail:
+    host: localhost
+    port: 1025
+    username: ""
+    password: ""
+    properties:
+      mail:
+        smtp:
+          auth: false
+          starttls:
+            enable: false
+
+# Override logging for development
+logging:
+  level:
+    com.auth: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.web: DEBUG
+
+# Actuator configuration for development
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,env,configprops
+  endpoint:
+    health:
+      show-details: always
+
+# Development specific overrides
+app:
+  cors:
+    allowed-origins: http://localhost:3000,http://localhost:4200,http://localhost:8081
+  rate-limit:
+    enabled: false
+  two-factor:
+    issuer-name: AuthServer Dev
+    qr-code:
+      width: 200
+      height: 200

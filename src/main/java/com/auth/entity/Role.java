@@ -1,7 +1,6 @@
 package com.auth.entity;
 
-import javax.annotation.processing.Generated;
-
+import com.auth.util.ERole;
 import jakarta.persistence.*;
 
 @Entity

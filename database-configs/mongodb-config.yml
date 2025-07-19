@@ -1,0 +1,72 @@
+# ===============================================
+# MongoDB Database Configuration
+# ===============================================
+
+app:
+  database:
+    type: mongodb
+    host: ${DATABASE_HOST:localhost}
+    port: ${DATABASE_PORT:27017}
+    name: ${DATABASE_NAME:authdb}
+    username: ${DATABASE_USERNAME:}
+    password: ${DATABASE_PASSWORD:}
+    mongodb:
+      authentication-database: ${MONGO_AUTH_DB:admin}
+      replica-set: ${MONGO_REPLICA_SET:}
+      ssl-enabled: ${MONGO_SSL_ENABLED:false}
+    options:
+      create-database-if-not-exist: true
+      show-sql: false
+      format-sql: false
+
+spring:
+  # MongoDB configuration (requires spring-boot-starter-data-mongodb dependency)
+  data:
+    mongodb:
+      host: ${app.database.host}
+      port: ${app.database.port}
+      database: ${app.database.name}
+      username: ${app.database.username}
+      password: ${app.database.password}
+      authentication-database: ${app.database.mongodb.authentication-database}
+
+# MongoDB specific environment variables
+# Set these in your environment or .env file:
+# DATABASE_HOST=localhost
+# DATABASE_PORT=27017
+# DATABASE_NAME=authdb
+# DATABASE_USERNAME=your_username (optional)
+# DATABASE_PASSWORD=your_password (optional)
+# MONGO_AUTH_DB=admin
+# MONGO_REPLICA_SET=your_replica_set (optional)
+# MONGO_SSL_ENABLED=false
+
+# Sample Docker command to run MongoDB:
+# docker run --name mongo-auth \
+#   -e MONGO_INITDB_ROOT_USERNAME=admin \
+#   -e MONGO_INITDB_ROOT_PASSWORD=password \
+#   -e MONGO_INITDB_DATABASE=authdb \
+#   -p 27017:27017 \
+#   -d mongo:4.4
+
+# Sample MongoDB commands to create database and user:
+# use authdb
+# db.createUser({
+#   user: "authuser",
+#   pwd: "password",
+#   roles: [
+#     { role: "readWrite", db: "authdb" }
+#   ]
+# })
+
+# Note: To use MongoDB, add this dependency to your pom.xml:
+# <dependency>
+#     <groupId>org.springframework.boot</groupId>
+#     <artifactId>spring-boot-starter-data-mongodb</artifactId>
+# </dependency>
+
+# And remove or comment out JPA related dependencies:
+# <!-- <dependency>
+#     <groupId>org.springframework.boot</groupId>
+#     <artifactId>spring-boot-starter-data-jpa</artifactId>
+# </dependency> -->
