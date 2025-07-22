@@ -38,12 +38,12 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"username\": \"johndoe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"SecurePassword123!\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"roles\": [\"user\"]\n}"
+              "raw": "{\n  \"username\": \"kunaluser\",\n  \"email\": \"kunal@example.com\",\n  \"password\": \"Kunal@123\",\n  \"firstName\": \"Kunal\",\n  \"lastName\": \"Kumar\",\n  \"roles\": [\"user\"]\n}"
             },
             "url": {
-              "raw": "{{baseUrl}}/auth/register",
+              "raw": "{{baseUrl}}/auth/signup",
               "host": ["{{baseUrl}}"],
-              "path": ["auth", "register"]
+              "path": ["auth", "signup"]
             }
           }
         },
@@ -79,12 +79,12 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"usernameOrEmail\": \"johndoe\",\n  \"password\": \"SecurePassword123!\"\n}"
+              "raw": "{\n  \"usernameOrEmail\": \"kunaluser\",\n  \"password\": \"Kunal@123\"\n}"
             },
             "url": {
-              "raw": "{{baseUrl}}/auth/login",
+              "raw": "{{baseUrl}}/auth/signin",
               "host": ["{{baseUrl}}"],
-              "path": ["auth", "login"]
+              "path": ["auth", "signin"]
             }
           }
         },
@@ -100,12 +100,12 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"usernameOrEmail\": \"johndoe\",\n  \"password\": \"SecurePassword123!\",\n  \"twoFactorCode\": \"123456\"\n}"
+              "raw": "{\n  \"usernameOrEmail\": \"kunaluser\",\n  \"password\": \"Kunal@123\",\n  \"twoFactorCode\": \"123456\"\n}"
             },
             "url": {
-              "raw": "{{baseUrl}}/auth/login",
+              "raw": "{{baseUrl}}/auth/signin",
               "host": ["{{baseUrl}}"],
-              "path": ["auth", "login"]
+              "path": ["auth", "signin"]
             }
           }
         },
@@ -124,9 +124,9 @@
               "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}"
             },
             "url": {
-              "raw": "{{baseUrl}}/auth/refresh",
+              "raw": "{{baseUrl}}/auth/refreshtoken",
               "host": ["{{baseUrl}}"],
-              "path": ["auth", "refresh"]
+              "path": ["auth", "refreshtoken"]
             }
           }
         },
@@ -159,7 +159,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"john.doe@example.com\"\n}"
+              "raw": "{\n  \"email\": \"kunal@example.com\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/auth/resend-verification",
@@ -180,7 +180,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"email\": \"john.doe@example.com\"\n}"
+              "raw": "{\n  \"email\": \"kunal@example.com\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/auth/forgot-password",
@@ -201,7 +201,7 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"token\": \"your-reset-token\",\n  \"newPassword\": \"NewSecurePassword123!\"\n}"
+              "raw": "{\n  \"token\": \"your-reset-token\",\n  \"newPassword\": \"KunalNew@123\"\n}"
             },
             "url": {
               "raw": "{{baseUrl}}/auth/reset-password",
@@ -221,9 +221,9 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/auth/logout",
+              "raw": "{{baseUrl}}/auth/signout",
               "host": ["{{baseUrl}}"],
-              "path": ["auth", "logout"]
+              "path": ["auth", "signout"]
             }
           }
         }
@@ -248,12 +248,12 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"username\": \"johndoe\"\n}"
+              "raw": "{\n  \"username\": \"kunaluser\"\n}"
             },
             "url": {
-              "raw": "{{baseUrl}}/auth/2fa/setup",
+              "raw": "{{baseUrl}}/auth/setup-2fa",
               "host": ["{{baseUrl}}"],
-              "path": ["auth", "2fa", "setup"]
+              "path": ["auth", "setup-2fa"]
             }
           }
         },
@@ -273,12 +273,12 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"username\": \"johndoe\",\n  \"code\": \"123456\"\n}"
+              "raw": "{\n  \"username\": \"kunaluser\",\n  \"code\": \"123456\"\n}"
             },
             "url": {
-              "raw": "{{baseUrl}}/auth/2fa/enable",
+              "raw": "{{baseUrl}}/auth/verify-2fa",
               "host": ["{{baseUrl}}"],
-              "path": ["auth", "2fa", "enable"]
+              "path": ["auth", "verify-2fa"]
             }
           }
         },
@@ -298,12 +298,12 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"username\": \"johndoe\",\n  \"code\": \"123456\"\n}"
+              "raw": "{\n  \"username\": \"kunaluser\",\n  \"code\": \"123456\"\n}"
             },
             "url": {
-              "raw": "{{baseUrl}}/auth/2fa/disable",
+              "raw": "{{baseUrl}}/auth/disable-2fa",
               "host": ["{{baseUrl}}"],
-              "path": ["auth", "2fa", "disable"]
+              "path": ["auth", "disable-2fa"]
             }
           }
         },
@@ -326,9 +326,9 @@
               "raw": "{\n  \"code\": \"123456\"\n}"
             },
             "url": {
-              "raw": "{{baseUrl}}/auth/2fa/verify",
+              "raw": "{{baseUrl}}/auth/verify-2fa",
               "host": ["{{baseUrl}}"],
-              "path": ["auth", "2fa", "verify"]
+              "path": ["auth", "verify-2fa"]
             }
           }
         }
@@ -348,9 +348,9 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/user/profile",
+              "raw": "{{baseUrl}}/api/user/profile",
               "host": ["{{baseUrl}}"],
-              "path": ["user", "profile"]
+              "path": ["api", "user", "profile"]
             }
           }
         },
@@ -370,12 +370,12 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"email\": \"john.smith@example.com\"\n}"
+              "raw": "{\n  \"firstName\": \"Kunal\",\n  \"lastName\": \"Kumar\",\n  \"email\": \"kunal@example.com\"\n}"
             },
             "url": {
-              "raw": "{{baseUrl}}/user/profile",
+              "raw": "{{baseUrl}}/api/user/profile",
               "host": ["{{baseUrl}}"],
-              "path": ["user", "profile"]
+              "path": ["api", "user", "profile"]
             }
           }
         },
@@ -390,9 +390,9 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/user/account",
+              "raw": "{{baseUrl}}/api/user/account",
               "host": ["{{baseUrl}}"],
-              "path": ["user", "account"]
+              "path": ["api", "user", "account"]
             }
           }
         }
@@ -412,9 +412,9 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/users?page=0&size=10",
+              "raw": "{{baseUrl}}/api/admin/users",
               "host": ["{{baseUrl}}"],
-              "path": ["admin", "users"],
+              "path": ["api", "admin", "users"],
               "query": [
                 {
                   "key": "page",
@@ -447,9 +447,9 @@
               "raw": "{\n  \"enabled\": false\n}"
             },
             "url": {
-              "raw": "{{baseUrl}}/admin/users/{{userId}}/status",
+              "raw": "{{baseUrl}}/api/admin/users/{{userId}}/enable",
               "host": ["{{baseUrl}}"],
-              "path": ["admin", "users", "{{userId}}", "status"]
+              "path": ["api", "admin", "users", "{{userId}}", "enable"]
             }
           }
         },
@@ -464,9 +464,26 @@
               }
             ],
             "url": {
-              "raw": "{{baseUrl}}/admin/users/{{userId}}",
+              "raw": "{{baseUrl}}/api/admin/users/{{userId}}",
               "host": ["{{baseUrl}}"],
-              "path": ["admin", "users", "{{userId}}"]
+              "path": ["api", "admin", "users", "{{userId}}"]
+            }
+          }
+        },
+        {
+          "name": "Get Dashboard Statistics",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{accessToken}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/api/admin/dashboard",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "admin", "dashboard"]
             }
           }
         }
@@ -503,7 +520,7 @@
   "variable": [
     {
       "key": "baseUrl",
-      "value": "http://localhost:8080/api",
+      "value": "http://localhost:4554/api",
       "type": "string"
     },
     {

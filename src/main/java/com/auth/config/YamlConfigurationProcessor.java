@@ -194,7 +194,7 @@ public class YamlConfigurationProcessor implements ApplicationListener<Applicati
         System.out.println("");
         System.out.println("Example app.config.yaml structure:");
         System.out.println("  server:");
-        System.out.println("    port: 8080");
+        System.out.println("    port: 4554");
         System.out.println("  app:");
         System.out.println("    database:");
         System.out.println("      type: postgresql");

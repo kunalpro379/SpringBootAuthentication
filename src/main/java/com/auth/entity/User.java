@@ -36,36 +36,64 @@ public class User implements UserDetails{
      private String password;
      
      @Size(max = 50)
+     @Column(name = "first_name")
      private String firstName;
      
      @Size(max = 50)
+     @Column(name = "last_name")
      private String lastName;
 
      private boolean enabled=false;
+     
+     @Column(name = "account_non_expired")
      private boolean accountNonExpired=true;
+     
+     @Column(name = "account_non_locked")
      private boolean accountNonLocked=true;
+     
+     @Column(name = "credentials_non_expired")
      private boolean credentialsNonExpired =true;
      
      //Email Verification 
+     @Column(name = "email_verification_token")
      private String emailVerificationToken;
+     
+     @Column(name = "email_verification_token_expiry")
      private LocalDateTime emailVerificationTokenExpiry;
+     
+     @Column(name = "email_verified")
      private boolean emailVerified = false;
 
      //Password Reset 
+     @Column(name = "password_reset_token")
      private String passwordResetToken;
+     
+     @Column(name = "password_reset_token_expiry")
      private LocalDateTime passwordResetTokenExpiry;
 
      //2FA
+     @Column(name = "two_factor_enabled")
      private boolean twoFactorEnabled = false;
+     
+     @Column(name = "two_factor_secret")
      private String twoFactorSecret;
 
      // OAuth
+     @Column(name = "provider")
      private String provider;
+     
+     @Column(name = "provider_id")
      private String providerId;
+     
      // Timestamps
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
-    private LocalDateTime lastLoginAt;
+     @Column(name = "created_at")
+     private LocalDateTime createdAt;
+     
+     @Column(name = "updated_at")
+     private LocalDateTime updatedAt;
+     
+     @Column(name = "last_login_at")
+     private LocalDateTime lastLoginAt;
 
     @ManyToMany(fetch=FetchType.LAZY)
     @JoinTable(

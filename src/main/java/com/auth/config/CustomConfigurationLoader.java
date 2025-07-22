@@ -2,16 +2,11 @@ package com.auth.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.FileSystemResource;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import java.io.File;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Custom configuration loader that reads from app.config.yaml
@@ -101,7 +96,7 @@ public class CustomConfigurationLoader {
 
     // Inner configuration classes
     public static class ServerConfig {
-        private int port = 8080;
+        private int port = 4554;
         private ServletConfig servlet = new ServletConfig();
         private SslConfig ssl = new SslConfig();
 
@@ -376,7 +371,7 @@ public class CustomConfigurationLoader {
             private boolean enabled = false;
             private String clientId;
             private String clientSecret;
-            private String redirectUri = "http://localhost:8080/oauth2/callback/google";
+            private String redirectUri = "http://localhost:4554/oauth2/callback/google";
 
             // Getters and setters
             public boolean isEnabled() { return enabled; }
@@ -393,7 +388,7 @@ public class CustomConfigurationLoader {
             private boolean enabled = false;
             private String clientId;
             private String clientSecret;
-            private String redirectUri = "http://localhost:8080/oauth2/callback/github";
+            private String redirectUri = "http://localhost:4554/oauth2/callback/github";
 
             // Getters and setters
             public boolean isEnabled() { return enabled; }
@@ -470,7 +465,7 @@ public class CustomConfigurationLoader {
         private String name = "development";
         private boolean debug = true;
         private String frontendUrl = "http://localhost:3000";
-        private String apiUrl = "http://localhost:8080";
+        private String apiUrl = "http://localhost:4554";
 
         // Getters and setters
         public String getName() { return name; }

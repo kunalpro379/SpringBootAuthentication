@@ -17,7 +17,7 @@ public class CustomConfigurationService {
     private CustomConfigurationLoader customConfig;
 
     // Server Configuration
-    @Value("${server.port:8080}")
+    @Value("${server.port:4554}")
     private int serverPort;
 
     // Database Configuration
@@ -166,7 +166,7 @@ public class CustomConfigurationService {
     @Value("${environment.frontend-url:http://localhost:3000}")
     private String environmentFrontendUrl;
 
-    @Value("${environment.api-url:http://localhost:8080}")
+    @Value("${environment.api-url:http://localhost:4554}")
     private String environmentApiUrl;
 
     // Admin Configuration

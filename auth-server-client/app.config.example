@@ -1,0 +1,11 @@
+# Example app.config (all fields optional)
+app:
+  baseUrl: http://localhost:4554/api
+  jwt:
+    secret: your-jwt-secret
+    expiration-ms: 3600000
+  features:
+    oauth2-enabled: true
+    two-factor-enabled: true
+    email-verification-enabled: true
+  # Add more fields as needed, all are optional 

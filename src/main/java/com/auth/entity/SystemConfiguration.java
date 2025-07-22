@@ -15,22 +15,28 @@ public class SystemConfiguration {
     private Long id;
     
     @NotBlank
-    @Column(unique = true)
+    @Column(name = "configKey", unique = true)
     private String configKey;
     
-    @Column(columnDefinition = "TEXT")
+    @Column(name = "configValue", columnDefinition = "TEXT")
     private String configValue;
     
     @Size(max = 500)
+    @Column(name = "description")
     private String description;
     
     @Enumerated(EnumType.STRING)
+    @Column(name = "category")
     private ConfigCategory category;
     
     @Enumerated(EnumType.STRING)
+    @Column(name = "type")
     private ConfigType type;
     
+    @Column(name = "isSecure")
     private boolean isSecure = false;  // For sensitive configs like passwords
+    
+    @Column(name = "isEditable")
     private boolean isEditable = true;  // Some configs might be read-only
     
     @Column(name = "created_by")
@@ -39,7 +45,10 @@ public class SystemConfiguration {
     @Column(name = "updated_by")
     private String updatedBy;
     
+    @Column(name = "createdAt")
     private LocalDateTime createdAt;
+    
+    @Column(name = "updatedAt")
     private LocalDateTime updatedAt;
     
     public SystemConfiguration() {}

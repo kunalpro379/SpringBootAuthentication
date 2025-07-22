@@ -1,0 +1,26 @@
+{
+     "name": "@kunalpro379/sec-auth",
+     "version": "1.0.7",
+     "description": "Node.js client for Java Authentication Server (JWT, OAuth2, 2FA, etc.)",
+     "main": "index.js",
+     "scripts": {
+          "test": "echo \"No tests yet\" && exit 0"
+     },
+     "keywords": [
+          "authentication",
+          "jwt",
+          "oauth2",
+          "2fa",
+          "client",
+          "spring-boot"
+     ],
+     "author": "kunal patil",
+     "license": "MIT",
+     "dependencies": {
+          "@kunalpro379/sec-auth": "^1.0.7",
+          "axios": "^1.10.0",
+          "express": "^5.1.0",
+          "js-yaml": "^4.1.0",
+          "ora": "^5.4.1"
+     }
+}

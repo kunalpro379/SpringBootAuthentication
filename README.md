@@ -1,3 +1,51 @@
+# Authentication Server
+
+## 🗂️ Use Case Diagram
+
+```mermaid
+usecase
+  actor User
+  actor Admin
+  User -- (Sign Up)
+  User -- (Sign In)
+  User -- (Sign In with Google)
+  User -- (Sign In with GitHub)
+  User -- (2FA Setup)
+  User -- (2FA Verify)
+  User -- (Forgot Password)
+  User -- (Reset Password)
+  User -- (View Profile)
+  User -- (Sign Out)
+  Admin -- (View Dashboard)
+  Admin -- (Manage Users)
+  Admin -- (Reset User 2FA)
+  Admin -- (System Cleanup)
+  Admin -- (Manage Configurations)
+```
+
+## 🧩 Sequence Diagram: Google OAuth2 Login
+
+```mermaid
+sequenceDiagram
+  participant User
+  participant Frontend
+  participant Backend
+  participant Google
+
+  User->>Frontend: Clicks "Sign in with Google"
+  Frontend->>Backend: GET /oauth2/authorization/google
+  Backend->>Google: Redirect to Google OAuth2
+  User->>Google: Login & Consent
+  Google->>Backend: Redirect with code
+  Backend->>Google: Exchange code for tokens
+  Google-->>Backend: Return user info
+  Backend->>DB: Find or create user
+  Backend->>Frontend: Redirect with JWT token
+  Frontend->>User: User is logged in
+```
+
+---
+
 # 🔐 Authentication Server
 
 A comprehensive Spring Boot authentication server with JWT, OAuth2, Two-Factor Authentication, and flexible multi-database support.
@@ -56,9 +104,9 @@ mvn clean spring-boot:run
 
 | Service | URL | Description |
 |---------|-----|-------------|
-| **API Base** | http://localhost:8080/api | Main API endpoints |
-| **Health Check** | http://localhost:8080/actuator/health | Application health status |
-| **H2 Console** | http://localhost:8080/h2-console | Database console (H2 only) |
+| **API Base** | http://localhost:4554/api | Main API endpoints |
+| **Health Check** | http://localhost:4554/actuator/health | Application health status |
+| **H2 Console** | http://localhost:4554/h2-console | Database console (H2 only) |
 | **API Documentation** | Available in `API.md` | Complete endpoint documentation |
 
 ## 🗄️ Database Support
@@ -246,7 +294,7 @@ export GOOGLE_CLIENT_SECRET=your-google-client-secret
 
 ### Using Postman
 1. Import `postman_collection.json`
-2. Set environment variable `baseUrl` to `http://localhost:8080/api`
+2. Set environment variable `baseUrl` to `http://localhost:4554/api`
 3. Run the "Register User" request
 4. Run the "Login User" request to get access token
 
@@ -258,7 +306,7 @@ export GOOGLE_CLIENT_SECRET=your-google-client-secret
 ### Using curl
 ```bash
 # Register a user
-curl -X POST http://localhost:8080/api/auth/register \
+curl -X POST http://localhost:4554/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "username": "testuser",
@@ -269,7 +317,7 @@ curl -X POST http://localhost:8080/api/auth/register \
   }'
 
 # Login
-curl -X POST http://localhost:8080/api/auth/login \
+curl -X POST http://localhost:4554/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "usernameOrEmail": "testuser",

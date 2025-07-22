@@ -3,7 +3,8 @@
 # ===============================================
 
 server:
-  port: 8080
+
+  port: 4551
   servlet:
     context-path: /
   forward-headers-strategy: framework
@@ -19,32 +20,26 @@ server:
 # Users can choose between: postgresql, mysql, mongodb, h2
 app:
   database:
-    type: ${DATABASE_TYPE:h2}  # Options: postgresql, mysql, mongodb, h2
-    host: ${DATABASE_HOST:localhost}
-    port: ${DATABASE_PORT:5432}
-    name: ${DATABASE_NAME:authdb}
-    username: ${DATABASE_USERNAME:sa}
-    password: ${DATABASE_PASSWORD:}
+    type: mysql
+    host: localhost
+    port: 3306
+    name: mydb
+    username: kunal
+    password: kunal
     
     # Connection pool settings (for SQL databases)
     pool:
-      maximum-size: ${DB_POOL_MAX_SIZE:20}
-      minimum-idle: ${DB_POOL_MIN_IDLE:5}
-      connection-timeout: ${DB_CONNECTION_TIMEOUT:30000}
-      idle-timeout: ${DB_IDLE_TIMEOUT:600000}
-      max-lifetime: ${DB_MAX_LIFETIME:1800000}
+      maximum-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
     
-    # MongoDB specific settings
-    mongodb:
-      authentication-database: ${MONGO_AUTH_DB:admin}
-      replica-set: ${MONGO_REPLICA_SET:}
-      ssl-enabled: ${MONGO_SSL_ENABLED:false}
-      
     # Additional options
     options:
-      create-database-if-not-exist: ${CREATE_DB_IF_NOT_EXIST:true}
-      show-sql: ${SHOW_SQL:false}
-      format-sql: ${FORMAT_SQL:false}
+      create-database-if-not-exist: true
+      show-sql: false
+      format-sql: false
 
 # ===== SPRING PROFILES =====
 spring:
@@ -53,12 +48,16 @@ spring:
   
   # JPA Configuration (will be set dynamically based on database type)
   jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto: ${JPA_DDL_AUTO:update}
-    show-sql: ${app.database.options.show-sql}
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
     properties:
       hibernate:
-        format_sql: ${app.database.options.format-sql}
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
         jdbc:
           lob:
             non_contextual_creation: true
@@ -115,14 +114,15 @@ spring:
       client:
         registration:
           google:
-            client-id: ${GOOGLE_CLIENT_ID:your-google-client-id}
-            client-secret: ${GOOGLE_CLIENT_SECRET:your-google-client-secret}
+            client-id: 11907542363-kcrr79e2krj8mgmf3hkv80t65fdc07j4.apps.googleusercontent.com
+            client-secret: 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
             scope: profile,email
-            redirect-uri: ${APP_BASE_URL:http://localhost:8080}/oauth2/callback/google
+            redirect-uri: http://localhost:4554/oauth2/callback/google
           github:
-            client-id: ${GITHUB_CLIENT_ID:your-github-client-id}
-            client-secret: ${GITHUB_CLIENT_SECRET:your-github-client-secret}
+            client-id: Ov23li4oeYpe6mJ7FAEI
+            client-secret: 2cddb1b90aeaa9fd44c5a014ea78dfa76d58ddb0
             scope: user:email
+            redirect-uri: http://localhost:4554/oauth2/callback/github
 
   # Cache Configuration
   cache:
@@ -130,10 +130,10 @@ spring:
     cache-names: configurations,users,roles
 
 # ===== APPLICATION SPECIFIC CONFIGURATION =====
-app:
-  name: ${APP_NAME:Authentication Server}
-  version: ${APP_VERSION:1.0.0}
-  description: ${APP_DESCRIPTION:Complete Authentication Server with JWT, OAuth2, and 2FA}
+# app:
+#   name: ${APP_NAME:Authentication Server}
+#   version: ${APP_VERSION:1.0.0}
+#   description: ${APP_DESCRIPTION:Complete Authentication Server with JWT, OAuth2, and 2FA}
   frontend-url: ${FRONTEND_URL:http://localhost:3000}
   
   # JWT Configuration
@@ -143,12 +143,12 @@ app:
     refresh-expiration-ms: ${JWT_REFRESH_EXPIRATION_MS:604800000}
   
   # Security Configuration
-  security:
-    password:
-      min-length: ${PASSWORD_MIN_LENGTH:8}
-    max-login-attempts: ${MAX_LOGIN_ATTEMPTS:5}
-    account-lockout-duration: ${LOCKOUT_DURATION:30}
-    session-timeout: ${SESSION_TIMEOUT:30}
+  # security:
+  #   password:
+  #     min-length: ${PASSWORD_MIN_LENGTH:8}
+  #   max-login-attempts: ${MAX_LOGIN_ATTEMPTS:5}
+  #   account-lockout-duration: ${LOCKOUT_DURATION:30}
+  #   session-timeout: ${SESSION_TIMEOUT:30}
   
   # Two-Factor Authentication
   two-factor:

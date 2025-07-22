@@ -2017,7 +2017,7 @@ public class EmailService {
         message.setTo(to);
         message.setSubject("Email Verification");
         message.setText("Please click the following link to verify your email: " +
-                "http://localhost:8080/api/auth/verify-email?token=" + token);
+                "http://localhost:4554/api/auth/verify-email?token=" + token);
         
         mailSender.send(message);
     }
@@ -2579,7 +2579,7 @@ public class TestController {
 
 ```properties:Authentication/src/main/resources/application.properties
 # Server configuration
-server.port=8080
+server.port=4554
 
 # Database configuration (PostgreSQL)
 spring.datasource.url=jdbc:postgresql://localhost:5432/authdb
@@ -2610,7 +2610,7 @@ spring.mail.properties.mail.smtp.starttls.enable=true
 spring.security.oauth2.client.registration.google.client-id=your-google-client-id
 spring.security.oauth2.client.registration.google.client-secret=your-google-client-secret
 spring.security.oauth2.client.registration.google.scope=profile,email
-spring.security.oauth2.client.registration.google.redirect-uri=http://localhost:8080/oauth2/callback/google
+spring.security.oauth2.client.registration.google.redirect-uri=http://localhost:4554/oauth2/callback/google
 
 # Logging
 logging.level.com.auth=DEBUG
@@ -2720,7 +2720,7 @@ To run this:
 3. Set up Google OAuth2 credentials
 4. Run: `mvn spring-boot:run`
 
-The server will be available at `http://localhost:8080` with all authentication endpoints ready!
+The server will be available at `http://localhost:4554` with all authentication endpoints ready!
 
 ```java
 package com.auth.config;
@@ -3106,7 +3106,7 @@ public class EmailService {
         message.setTo(to);
         message.setSubject("Email Verification");
         message.setText("Please click the following link to verify your email: " +
-                "http://localhost:8080/api/auth/verify-email?token=" + token);
+                "http://localhost:4554/api/auth/verify-email?token=" + token);
         
         mailSender.send(message);
     }
@@ -3658,7 +3658,7 @@ public class TestController {
 
 ```properties
 # Server configuration
-server.port=8080
+server.port=4554
 
 # Database configuration (PostgreSQL)
 spring.datasource.url=jdbc:postgresql://localhost:5432/authdb
@@ -3689,7 +3689,7 @@ spring.mail.properties.mail.smtp.starttls.enable=true
 spring.security.oauth2.client.registration.google.client-id=your-google-client-id
 spring.security.oauth2.client.registration.google.client-secret=your-google-client-secret
 spring.security.oauth2.client.registration.google.scope=profile,email
-spring.security.oauth2.client.registration.google.redirect-uri=http://localhost:8080/oauth2/callback/google
+spring.security.oauth2.client.registration.google.redirect-uri=http://localhost:4554/oauth2/callback/google
 
 # Logging
 logging.level.com.auth=DEBUG
